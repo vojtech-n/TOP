@@ -1,0 +1,74 @@
+body {
+    font-family: Roboto;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.hero, .banner {
+    background-color: #1F2937;
+    color: white;
+    display: flex;
+    padding-left: 200px;
+    padding-right: 200px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+}
+
+header .headerlinks {
+    display: flex;
+}
+
+header .headerlinks ul {
+    display: flex;
+    gap: 15px;
+    padding: 0px;
+}
+
+.banner {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.banner img {
+    width: 600px;
+    height: 200px;
+    padding-left: 50px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 1;
+    
+}
+
+.image1 img,
+.image2 img,
+.image3 img,
+.image4 img {
+    display: flex;
+    outline: 2px solid green;
+    height: 120px;
+    width: 120px;
+}
+
+.caption {
+    height: 120px;
+    width: 120px;
+}
