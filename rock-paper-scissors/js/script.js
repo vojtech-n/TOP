@@ -10,18 +10,14 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    let control = Boolean(true)
-    while (control) {
-        let humanAnswer = window.prompt("Rock, Paper, Scissors?").toLowerCase();
-        if (humanAnswer === "rock" || humanAnswer === "paper" || humanAnswer === "scissors") {
-            return humanAnswer;
-        } else alert("You have to pick either Rock, Paper, Scissors!");
-    }
-}
-
-// for (i = 0; i < 10; i++) {
-//     console.log(getComputerChoice());
+// function getHumanChoice() {
+//     let control = Boolean(true)
+//     while (control) {
+//         let humanAnswer = window.prompt("Rock, Paper, Scissors?").toLowerCase();
+//         if (humanAnswer === "rock" || humanAnswer === "paper" || humanAnswer === "scissors") {
+//             return humanAnswer;
+//         } else alert("You have to pick either Rock, Paper, Scissors!");
+//     }
 // }
 
 function playRound(humanChoice, computerChoice) {
@@ -29,35 +25,52 @@ function playRound(humanChoice, computerChoice) {
     while (control) {
         if (humanChoice === computerChoice) {
             alert("Even! Play again!")
-            return playRound(getHumanChoice(), getComputerChoice());
+            // return playRound(getHumanChoice(), getComputerChoice());
+            break;
         } else if ((humanChoice === "rock" && computerChoice === "scissors") || (humanChoice === "scissors" && computerChoice === "paper") || (humanChoice === "paper" && computerChoice === "rock")) {
             humanScore += 1;
-            alert("Human wins the round! " + humanChoice + " beats the " + computerChoice);
+            if (humanScore < 5) {
+                alert("Human wins the round! " + humanChoice + " beats the " + computerChoice);
+            } else {
+                alert("Human wins the game!");
+                humanScore = 0, pcScore = 0;
+            }
             break;
         } else if ((humanChoice === "rock" && computerChoice === "paper") || (humanChoice === "scissors" && computerChoice === "rock") || (humanChoice === "paper" && computerChoice === "scissors")) {
             pcScore += 1;
-            alert("Clanker wins the round! " + computerChoice + " beats the " + humanChoice);
+            if (pcScore < 5) {
+                alert("Clanker wins the round! " + computerChoice + " beats the " + humanChoice);
+            } else {
+                alert("Clanker wins the game!")
+                humanScore = 0, pcScore = 0;
+            }
             break;
         }
     }
 }
 
-function playGame(maxRounds) {
-    for (i = 1; i <= maxRounds; i++) {
-        playRound(getHumanChoice(), getComputerChoice())
-    }
-}
+// function playGame(maxRounds) {
+//     for (i = 1; i <= maxRounds; i++) {
+//         playRound(getHumanChoice(), getComputerChoice())
+//     }
+// }
+
+document.querySelectorAll("button").forEach(item => {
+    item.addEventListener('click', event => {
+        // playGame(5);
+        playRound(item.id, getComputerChoice())
+        content.textContent = "Human score: " + humanScore + ", PC score: " + pcScore;
+    })
+})
 
 let humanScore = 0;
 let pcScore = 0;
+let round = 0;
 
-// playRound(getHumanChoice(), getComputerChoice());
-// console.log("PC Score: " + pcScore);
-// console.log("Human Score: " + humanScore);
-playGame(5);
-alert("PC Score: " + pcScore + ", Human Score: " + humanScore);
-// alert("Human Score: " + humanScore);
+const container = document.querySelector("#results");
 
-// kamen nuzky, nuzky kamen, 
-// kamen papir, papir kamen,
-// nuzky papir, papri nuzky
+const content = document.createElement("div");
+content.classList.add("content");
+content.textContent = "Human score: " + humanScore + ", PC score: " + pcScore;
+
+container.append(content);
